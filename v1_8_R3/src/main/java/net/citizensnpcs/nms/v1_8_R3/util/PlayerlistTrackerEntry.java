@@ -41,12 +41,12 @@ public class PlayerlistTrackerEntry extends EntityTrackerEntry {
     }
 
     @Override
-    public void updatePlayer(final EntityPlayer entityplayer, int count) {
+    public void updatePlayer(final EntityPlayer entityplayer, int count, boolean shouldUpdate) {
         // prevent updates to NPC "viewers"
         if (entityplayer instanceof EntityHumanNPC)
             return;
         lastUpdatedPlayer = entityplayer;
-        super.updatePlayer(entityplayer, count);
+        super.updatePlayer(entityplayer, count, shouldUpdate);
         lastUpdatedPlayer = null;
     }
 
@@ -100,5 +100,5 @@ public class PlayerlistTrackerEntry extends EntityTrackerEntry {
     private static Field C = NMS.getField(EntityTrackerEntry.class, "c");
     private static Field TRACKER = NMS.getField(EntityTrackerEntry.class, "tracker");
     private static Field U = NMS.getField(EntityTrackerEntry.class, "u");
-    private static Method update = NMS.getMethod(EntityTrackerEntry.class, "updatePlayer", false, EntityPlayer.class, int.class);
+    private static Method update = NMS.getMethod(EntityTrackerEntry.class, "updatePlayer", false, EntityPlayer.class, int.class, boolean.class);
 }
